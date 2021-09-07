@@ -5,6 +5,7 @@ const app = express();
 app.use(express.json());
 app.use(logger);
 app.use(cors())
+
 let notes = [
   {
     id: 1,
@@ -84,5 +85,5 @@ app.use((req, res) => {
 })
 
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => { console.log(`Se ha realizado con éxito en el puerto ${PORT}`); });
