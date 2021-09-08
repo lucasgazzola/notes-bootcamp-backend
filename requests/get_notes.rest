@@ -1,6 +1,23 @@
+GET http://localhost:3000/api/notes/
+
+###
 POST http://localhost:3000/api/notes/ 
-"Content-Type: application/json"
+Content-Type: application/json
 
 {
-  "content": "This is the content of the note"
+  "content": "Note 6",
+  "important": false
+}
+
+###
+
+DELETE http://localhost:3000/api/notes/613931e179d4dfae7a9ba622
+###
+
+PUT http://localhost:3000/api/notes/61392bee1382a405e05e6b69
+Content-Type: application/json
+
+{
+  "content": "This is a double updated note",
+  "important": true
 }
