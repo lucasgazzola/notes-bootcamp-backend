@@ -1,15 +1,14 @@
-require('./mongo')
-const express = require('express')
-const logger = require('./loggerMiddleware')
-const cors = require('cors')
-const Note = require('./models/Note')
+require('dotenv').config();
+require('./mongo');
+const express = require('express');
+const logger = require('./loggerMiddleware');
+const cors = require('cors');
+const Note = require('./models/Note');
 
-const app = express()
-app.use(express.json())
-app.use(logger)
-app.use(cors())
-
-let notes = [];
+const app = express();
+app.use(express.json());
+app.use(logger);
+app.use(cors());
 
 // const app = http.createServer((request, response) => {
 //   response.writeHead(200, { 'Content-Type': 'application/json' })
@@ -31,7 +30,9 @@ app.get('/api/notes/:id', (req, res) => {
 })
 
 app.get('/api/notes/', (req, res) => {
-  res.json(notes).end()
+  Note.find({}).then(notes => {
+    res.json(notes)
+  })
 })
 
 app.post('/api/notes/', (req, res) => {
@@ -67,5 +68,5 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Not found' })
 })
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT;
 app.listen(PORT, () => { console.log(`Se ha realizado con éxito en el puerto ${PORT}`) })
