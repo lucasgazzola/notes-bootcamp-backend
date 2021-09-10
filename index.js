@@ -17,7 +17,7 @@ app.use(cors());
 //   response.end(JSON.stringify(notes))
 // })
 app.get('/', (req, res) => {
-  res.send('<h1>Hello World this is a DataBase test. Have fun!</h1>')
+  res.send('<h1>Hello World this is a DataBase test. Have fun!</h1>').end()
 })
 
 app.get('/api/notes/:id', (req, res, next) => {
@@ -26,9 +26,9 @@ app.get('/api/notes/:id', (req, res, next) => {
   Note.findById(id)
     .then(note => {
       if (note) {
-        res.json(note)
+        res.json(note).end()
       } else {
-        res.status(404).end()
+        res.status(404).send("<h1>La nota no existe</h1>").end()
       }
     })
     .catch(e => {
@@ -38,8 +38,9 @@ app.get('/api/notes/:id', (req, res, next) => {
   // res.json(notes)
 })
 
-app.get('/api/notes/', (req, res) => {
-  Note.find({}).then(notes => res.json(notes))
+app.get('/api/notes/', async (req, res) => {
+  const notes = await Note.find({})
+  res.json(notes).end()
 })
 
 app.post('/api/notes/', (req, res) => {
@@ -48,7 +49,7 @@ app.post('/api/notes/', (req, res) => {
   if (!note || !note.content) {
     return res.status(400).json({
       error: 'Note content is missing'
-    })
+    }).end()
   }
   const newNote = new Note({
     content: note.content,
@@ -56,7 +57,7 @@ app.post('/api/notes/', (req, res) => {
     date: new Date()
   })
 
-  newNote.save().then(note => res.status(201).json(note))
+  newNote.save().then(note => res.status(201).json(note).end())
 })
 
 app.put('/api/notes/:id', (req, res, next) => {
@@ -69,7 +70,7 @@ app.put('/api/notes/:id', (req, res, next) => {
   }
 
   Note.findByIdAndUpdate(id, newNoteInfo, { new: true })
-    .then(result => res.json(result))
+    .then(result => res.json(result).end())
     .catch(err => next(err))
 })
 
@@ -84,4 +85,6 @@ app.use(notFound)
 app.use(handleError)
 
 const PORT = process.env.PORT;
-app.listen(PORT, () => { console.log(`Se ha realizado con éxito en el puerto ${PORT}`) })
+const server = app.listen(PORT, () => { console.log(`Se ha realizado con éxito en el puerto ${PORT}`) });
+
+module.exports = { app, server };

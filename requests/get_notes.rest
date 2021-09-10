@@ -1,19 +1,15 @@
 GET http://localhost:3000/api/notes/
-
 ###
 POST http://localhost:3000/api/notes/ 
 Content-Type: application/json
 
 {
-  "content": "Note 6",
+  "content": "Note 99",
   "important": false
 }
-
 ###
-
-DELETE http://localhost:3000/api/notes/613931e179d4dfae7a9ba622
+DELETE http://localhost:3000/api/notes/613b6cd0f39ffb2e82e86b1c
 ###
-
 PUT http://localhost:3000/api/notes/61392bee1382a405e05e6b69
 Content-Type: application/json
 

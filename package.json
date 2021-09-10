@@ -4,17 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
     "lint": "standard",
-    "start": "node index.js",
-    "test": "standard && node index.js"
+    "start": "cross-env NODE_ENV=production node index.js",
+    "test": "cross-env NODE_ENV=test jest --verbose --silent",
+    "test:watch": "npm run test -- --watch"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "cross-env": "7.0.3",
     "git": "0.1.5",
+    "jest": "27.1.1",
     "nodemon": "2.0.12",
-    "standard": "16.0.3"
+    "standard": "16.0.3",
+    "supertest": "6.1.6"
   },
   "dependencies": {
     "cors": "2.8.5",
