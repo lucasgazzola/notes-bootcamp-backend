@@ -6,6 +6,7 @@ const cors = require('cors');
 const Note = require('./models/Note');
 const notFound = require('./middlewares/notFound');
 const handleError = require('./middlewares/handleError');
+const usersRouter = require('./controllers/users')
 
 const app = express();
 app.use(express.json());
@@ -80,6 +81,8 @@ app.delete('/api/notes/:id', (req, res, next) => {
     .then(() => res.send(204).end())
     .catch(err => next(err));
 })
+
+app.use('app/users', usersRouter);
 
 app.use(notFound)
 app.use(handleError)
