@@ -15,6 +15,19 @@ const initialNotes = [
   }
 ]
 
+const initialUsers = [
+  {
+    username: 'tuvi',
+    name: 'Tu vieja',
+    password: 'tuviejaaaaa'
+  },
+  {
+    username: 'lucas017',
+    name: 'Lucas',
+    password: '393939'
+  }
+]
+
 const getAllContentsFromNotes = async () => {
   const response = await api.get('/api/notes');
   return {
@@ -23,4 +36,12 @@ const getAllContentsFromNotes = async () => {
   }
 }
 
-module.exports = { initialNotes, api, getAllContentsFromNotes }
+const getAllContentsFromUsers = async () => {
+  const response = await api.get('/api/users');
+  return {
+    usernames: response.body.map(user => user.username),
+    response
+  }
+}
+
+module.exports = { initialNotes, initialUsers, api, getAllContentsFromNotes, getAllContentsFromUsers }

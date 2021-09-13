@@ -4,9 +4,11 @@ const express = require('express');
 const logger = require('./loggerMiddleware');
 const cors = require('cors');
 const Note = require('./models/Note');
+const User = require('./models/User')
 const notFound = require('./middlewares/notFound');
 const handleError = require('./middlewares/handleError');
-const usersRouter = require('./controllers/users')
+const usersRouter = require('./controllers/users');
+const notesRouter = require('./controllers/notes')
 
 const app = express();
 app.use(express.json());
@@ -44,6 +46,11 @@ app.get('/api/notes/', async (req, res) => {
   res.json(notes).end()
 })
 
+app.get('/api/users/', async (req, res) => {
+  const users = await User.find({})
+  res.json(users).end()
+})
+
 app.post('/api/notes/', (req, res) => {
   const note = req.body
 
@@ -57,7 +64,6 @@ app.post('/api/notes/', (req, res) => {
     important: note.important || false,
     date: new Date()
   })
-
   newNote.save().then(note => res.status(201).json(note).end())
 })
 
@@ -82,7 +88,9 @@ app.delete('/api/notes/:id', (req, res, next) => {
     .catch(err => next(err));
 })
 
-app.use('app/users', usersRouter);
+app.use('/api/notes', notesRouter);
+
+app.use('/api/users', usersRouter);
 
 app.use(notFound)
 app.use(handleError)
