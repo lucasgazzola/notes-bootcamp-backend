@@ -1,0 +1,22 @@
+GET http://localhost:3000/api/notes/1243
+###
+
+POST http://localhost:3000/api/notes/ 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNDBjZDU5OTJmNDVhNDBiZmM0ZWQzMyIsInVzZXJuYW1lIjoibnVldm8iLCJpYXQiOjE2MzE2NDIxNTd9.yc4hd0v1VcDayHnjjfANETz6zn3Ukc-TmPSkIgAv6EQ
+
+{
+  "content": "Nota del nuevo user con token de userExtractor",
+  "important": true
+}
+###
+DELETE http://localhost:3000/api/notes/6140964880f2dabd65031212
+###
+PUT http://localhost:3000/api/notes/61392bee1382a405e05e6b69
+Content-Type: application/json
+
+{
+  "content": "This is an user's note",
+  "important": true,
+  "userId": "613fad5fc08cef1d2b1beced"
+}
