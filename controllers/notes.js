@@ -22,6 +22,10 @@ notesRouter.get('/api/notes/:id', (req, res, next) => {
   const { id } = req.params;
 
   Note.findById(id)
+    .populate('user', {
+      username: 1,
+      name: 1
+    })
     .then(note => {
       if (note) {
         return res.json(note).end()

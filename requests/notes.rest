@@ -1,12 +1,12 @@
-GET http://localhost:3000/api/notes/1243
+GET http://localhost:3000/api/notes/614126516d38ca290d715d4c
 ###
 
 POST http://localhost:3000/api/notes/ 
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNDBjZDU5OTJmNDVhNDBiZmM0ZWQzMyIsInVzZXJuYW1lIjoibnVldm8iLCJpYXQiOjE2MzE2NDIxNTd9.yc4hd0v1VcDayHnjjfANETz6zn3Ukc-TmPSkIgAv6EQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNDBiN2IyMmE0NGUxMmNiYjRiM2FjZSIsInVzZXJuYW1lIjoicm9vdCIsImlhdCI6MTYzMTY1OTQ3NH0.p1Wfuq4sftcFYVv5QNnUMmRGu4PCEGOmAjkd92Yc--Q 
 
 {
-  "content": "Nota del nuevo user con token de userExtractor",
+  "content": "Nota con el token user root",
   "important": true
 }
 ###
