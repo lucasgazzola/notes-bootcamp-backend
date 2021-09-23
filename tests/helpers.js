@@ -1,6 +1,6 @@
-const { app } = require('../index');
-const supertest = require('supertest');
-const api = supertest(app);
+const { app } = require('../index')
+const supertest = require('supertest')
+const api = supertest(app)
 
 const initialNotes = [
   {
@@ -29,7 +29,7 @@ const initialUsers = [
 ]
 
 const getAllContentsFromNotes = async () => {
-  const response = await api.get('/api/notes');
+  const response = await api.get('/api/notes')
   return {
     contents: response.body.map(note => note.content),
     response
@@ -37,7 +37,7 @@ const getAllContentsFromNotes = async () => {
 }
 
 const getAllContentsFromUsers = async () => {
-  const response = await api.get('/api/users');
+  const response = await api.get('/api/users')
   return {
     usernames: response.body.map(user => user.username),
     response
