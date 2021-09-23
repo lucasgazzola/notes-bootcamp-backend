@@ -1,3 +1,5 @@
+/* eslint-disable no-sequences */
+/* eslint-disable no-unused-expressions */
 const { Schema, model } = require('mongoose')
 
 const noteSchema = new Schema({
@@ -15,8 +17,8 @@ const Note = model('Note', noteSchema)
 noteSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id,
-      delete returnedObject._id,
-      delete returnedObject.__v
+    delete returnedObject._id,
+    delete returnedObject.__v
   }
 })
 

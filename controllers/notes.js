@@ -1,7 +1,7 @@
-const Note = require('../models/Note');
-const User = require('../models/User');
-const notesRouter = require('express').Router();
-const userExtractor = require('../middlewares/userExtractor');
+const Note = require('../models/Note')
+const User = require('../models/User')
+const notesRouter = require('express').Router()
+const userExtractor = require('../middlewares/userExtractor')
 
 notesRouter.get('/', (req, res) => {
   // GET página principal
@@ -19,7 +19,7 @@ notesRouter.get('/api/notes/', async (req, res) => {
 
 notesRouter.get('/api/notes/:id', (req, res, next) => {
   // GET de la nota con ese ID
-  const { id } = req.params;
+  const { id } = req.params
 
   Note.findById(id)
     .populate('user', {
@@ -39,15 +39,15 @@ notesRouter.get('/api/notes/:id', (req, res, next) => {
 })
 
 notesRouter.post('/api/notes/', userExtractor, async (req, res, next) => {
-  // POST de notas 
+  // POST de notas
   const {
     content,
-    important = false,
-  } = req.body;
+    important = false
+  } = req.body
 
-  const { userId } = req;
+  const { userId } = req
 
-  const user = await User.findById(userId);
+  const user = await User.findById(userId)
   if (!content) {
     return res.status(400).json({
       error: 'Note content is missing'
@@ -61,10 +61,10 @@ notesRouter.post('/api/notes/', userExtractor, async (req, res, next) => {
   })
 
   try {
-    const savedNote = await newNote.save();
-    user.notes = [...user.notes, savedNote._id];
-    await user.save();
-    res.json(savedNote);
+    const savedNote = await newNote.save()
+    user.notes = [...user.notes, savedNote._id]
+    await user.save()
+    res.json(savedNote)
   } catch (err) {
     next(err)
   }
@@ -72,8 +72,8 @@ notesRouter.post('/api/notes/', userExtractor, async (req, res, next) => {
 
 notesRouter.put('/api/notes/:id', userExtractor, (req, res, next) => {
   // PUT (actualización) de notas con cierto ID
-  const { id } = req.params;
-  const { content, important = false } = req.body;
+  const { id } = req.params
+  const { content, important = false } = req.body
 
   const newNoteInfo = {
     content,
@@ -90,7 +90,7 @@ notesRouter.delete('/api/notes/:id', userExtractor, (req, res, next) => {
   const { id } = req.params
   Note.findByIdAndDelete(id)
     .then(() => res.send(204).end())
-    .catch(err => next(err));
+    .catch(err => next(err))
 })
 
-module.exports = notesRouter;
+module.exports = notesRouter
