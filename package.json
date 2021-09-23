@@ -7,6 +7,7 @@
     "dev": "cross-env NODE_ENV=development nodemon index.js",
     "lint": "standard",
     "start": "cross-env NODE_ENV=production node index.js",
+    "start:test": "cross-env NODE_ENV=test node index.js",
     "test": "cross-env NODE_ENV=test PORT=1234 jest --verbose --silent tests/users.test.js",
     "test:watch": "npm run test -- --watch"
   },
@@ -15,7 +16,7 @@
   "devDependencies": {
     "cross-env": "7.0.3",
     "git": "0.1.5",
-    "jest": "27.1.1",
+    "jest": "27.2.1",
     "nodemon": "2.0.12",
     "standard": "16.0.3",
     "supertest": "6.1.6"
@@ -25,11 +26,14 @@
     "cors": "2.8.5",
     "dotenv": "10.0.0",
     "express": "4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "6.0.5",
+    "jsonwebtoken": "8.5.1",
+    "mongoose": "6.0.7",
     "mongoose-unique-validator": "2.0.3"
   },
   "eslintConfig": {
-    "extends": "./node_modules/standard/eslintrc.json"
+    "extends": "./node_modules/standard/eslintrc.json",
+    "rules": {
+      "no-unused-vars": "warn"
+    }
   }
 }
